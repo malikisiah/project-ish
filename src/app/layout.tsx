@@ -1,12 +1,14 @@
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Kulim_Park } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import NavBar from "./_components/NavBar";
 
-const inter = Inter({
+const inter = Kulim_Park({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: "200",
 });
 
 export const metadata = {
@@ -21,9 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="black">
+    <html lang="en" data-theme="lofi">
       <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <NavBar />
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );
