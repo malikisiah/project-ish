@@ -33,7 +33,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -46,7 +46,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -59,7 +59,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -70,7 +70,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -83,7 +83,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -96,7 +96,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -109,7 +109,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -122,7 +122,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-1"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -176,7 +176,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-2"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -187,7 +187,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-2"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -198,7 +198,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-2"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -215,7 +215,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-3"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -226,7 +226,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-3"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
@@ -239,7 +239,7 @@ export default function ContactForm() {
             <label className="label cursor-pointer">
               <input
                 type="radio"
-                name="radio-10"
+                name="radio-3"
                 className="radio mr-2 checked:bg-red-500"
                 checked
               />
