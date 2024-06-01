@@ -125,7 +125,7 @@ export default async function Home() {
         </div>
         <div className="mt-12 flex w-full items-center justify-center bg-base-200">
           <iframe
-            src="https://www.youtube.com/embed/gfU1iZnjRZM"
+            src="https://www.youtube.com/embed/31RA4R58ujg"
             allowFullScreen
             width={550}
             height={300}
