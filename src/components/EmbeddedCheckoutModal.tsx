@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback } from "react";
+import { type Dispatch, type SetStateAction, useCallback } from "react";
+
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -15,7 +17,13 @@ type StripeResponse = {
 
 const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_KEY);
 
-export default function Page() {
+export default function EmbeddedCheckoutModal({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const fetchClientSecret = useCallback(async () => {
     const response = await fetch("/api/stripe/embedded-checkout", {
       method: "POST",
@@ -36,10 +44,29 @@ export default function Page() {
   const options = { fetchClientSecret };
 
   return (
-    <div id="checkout">
-      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-        <EmbeddedCheckout />
-      </EmbeddedCheckoutProvider>
-    </div>
+    <Dialog open={open} onClose={setOpen} className="relative z-10">
+      <DialogBackdrop
+        transition
+        className="fixed inset-0 bg-gray-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+      />
+
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <DialogPanel
+            transition
+            className="relative w-full max-w-6xl transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+          >
+            <div id="checkout">
+              <EmbeddedCheckoutProvider
+                stripe={stripePromise}
+                options={options}
+              >
+                <EmbeddedCheckout />
+              </EmbeddedCheckoutProvider>
+            </div>
+          </DialogPanel>
+        </div>
+      </div>
+    </Dialog>
   );
 }

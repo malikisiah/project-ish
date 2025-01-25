@@ -4,7 +4,7 @@ const products1 = [
   {
     id: 1,
     name: "Focus Paper Refill",
-    href: "#",
+    href: "product/1",
     price: "$13",
     description: "3 sizes available",
     imageSrc:
@@ -15,7 +15,7 @@ const products1 = [
   {
     id: 2,
     name: "Focus Card Holder",
-    href: "#",
+    href: "product/2",
     price: "$64",
     description: "Walnut",
     imageSrc:
@@ -25,7 +25,7 @@ const products1 = [
   {
     id: 3,
     name: "Focus Carry Pouch",
-    href: "#",
+    href: "product/3",
     price: "$32",
     description: "Heather Gray",
     imageSrc:
@@ -39,7 +39,7 @@ const products2 = [
   {
     id: 7,
     name: "Electric Kettle",
-    href: "#",
+    href: "product/7",
     price: "$149",
     description: "Black",
     imageSrc:
@@ -50,7 +50,7 @@ const products2 = [
   {
     id: 8,
     name: "Leather Workspace Pad",
-    href: "#",
+    href: "product/8",
     price: "$165",
     description: "Black",
     imageSrc:
@@ -61,7 +61,7 @@ const products2 = [
   {
     id: 9,
     name: "Leather Long Wallet",
-    href: "#",
+    href: "product/9",
     price: "$118",
     description: "Natural",
     imageSrc:
