@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import NavBar from "~/components/NavBar";
 
 export const metadata: Metadata = {
   title: "Project-Ish",
@@ -17,11 +18,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} bg-base-200`}
+      className={`${GeistSans.variable} bg-base-300`}
       data-theme="lofi"
     >
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <NavBar />
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );
