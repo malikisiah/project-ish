@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
+  const pathName = usePathname();
+  console.log(pathName);
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-accent text-accent-content">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -29,28 +32,33 @@ export default function NavBar() {
               className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                <Link href={"/music"}>Music</Link>
               </li>
               <li>
-                <a>Item 2</a>
+                <Link href={"/music"}>Media</Link>
               </li>
               <li>
-                <a>Item 3</a>
+                <Link href={"/music"}>Merch</Link>
               </li>
             </ul>
           </div>
           {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal gap-8 px-1 text-2xl">
             <li>
-              <a>Item 1</a>
+              <Link
+                href={"/music"}
+                className={pathName.includes("music") ? "text-neutral" : ""}
+              >
+                Music
+              </Link>
             </li>
             <li>
-              <a>Item 2</a>
+              <Link href={"/media"}>Media</Link>
             </li>
             <li>
-              <a>Item 3</a>
+              <Link href={"/merch"}>Merch</Link>
             </li>
           </ul>
         </div>

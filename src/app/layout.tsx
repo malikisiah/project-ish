@@ -1,6 +1,6 @@
 import "~/styles/globals.css";
+import { JetBrains_Mono } from "next/font/google";
 
-import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
@@ -12,13 +12,15 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+const font = JetBrains_Mono();
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} bg-base-300`}
+      className={`${font.className} bg-base-300`}
       data-theme="lofi"
     >
       <body>
