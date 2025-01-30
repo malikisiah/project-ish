@@ -30,6 +30,7 @@ export default function EmbeddedCheckoutModal({
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ price_ids: ["paul", "peter", "steven"] }),
     });
 
     if (!response.ok) {

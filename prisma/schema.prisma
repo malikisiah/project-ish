@@ -11,6 +11,14 @@ datasource db {
     directUrl = env("DIRECT_URL")
 }
 
+model Product {
+    id Int @id@default(autoincrement())
+    name String
+    image String
+    priceInCents Int
+}
+
+
 model Post {
     id        Int      @id @default(autoincrement())
     name      String

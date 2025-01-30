@@ -64,10 +64,7 @@ export default function NavBar() {
         </div>
         <div className="navbar-end">
           {/* Shopping Cart */}
-          <Link
-            href={"/merch/checkout"}
-            className="btn btn-circle btn-ghost mr-5"
-          >
+          <Link href={"/checkout"} className="btn btn-circle btn-ghost mr-5">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -58,12 +58,6 @@ export default function Page() {
                   <br />
                   Ready for Download
                 </h2>
-                <div className="mt-6 text-base">
-                  <a href="#" className="font-semibold text-white">
-                    Shop
-                    <span aria-hidden="true"> &rarr;</span>
-                  </a>
-                </div>
               </div>
 
               <div className="absolute -top-32 left-1/2 min-w-max -translate-x-1/2 transform sm:top-6 sm:translate-x-0">
