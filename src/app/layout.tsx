@@ -4,7 +4,7 @@ import { JetBrains_Mono } from "next/font/google";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import NavBar from "~/components/NavBar";
+import NavBar from "~/components/ui/NavBar";
 
 export const metadata: Metadata = {
   title: "Project-Ish",

@@ -1,4 +1,5 @@
-import ProductOverView from "~/components/ProductOverView";
+import ProductOverview from "~/components/ProductOverview";
+import { db } from "~/server/db";
 
 export default async function Page({
   params,
@@ -6,7 +7,11 @@ export default async function Page({
   params: Promise<{ productId: string }>;
 }) {
   const productId = (await params).productId;
-  //perform server side lookup of product info
-  //includes images, price, product details
-  return <ProductOverView />;
+
+  const product = await db.product.findUniqueOrThrow({
+    where: {
+      uuid: productId,
+    },
+  });
+  return <ProductOverview product={product} />;
 }

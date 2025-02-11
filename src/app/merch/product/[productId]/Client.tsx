@@ -4,7 +4,7 @@ import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 
 import Image from "next/image";
-import EmbeddedCheckoutModal from "~/components/EmbeddedCheckoutModal";
+import EmbeddedCheckoutModal from "~/components/ui/EmbeddedCheckoutModal";
 
 const product = {
   name: "Basic Tee 6-Pack",

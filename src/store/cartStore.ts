@@ -1,63 +1,32 @@
 import { create } from "zustand";
-
-type CartItem = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image?: string;
-};
+import type { Product } from "@prisma/client";
+import { persist } from "zustand/middleware";
 
 type CartState = {
-  items: CartItem[];
-  addItem: (item: CartItem) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
-  clearCart: () => void;
-  totalPrice: number;
+  items: Product[];
+  addItem: (item: Product) => void;
+  removeItem: (id: number) => void;
 };
 
-export const useCartStore = create<CartState>((set, get) => ({
-  items: [],
+export const useCartStore = create<CartState>()(
+  persist(
+    (set) => ({
+      items: [],
 
-  addItem: (item) => {
-    set((state) => {
-      const existingItem = state.items.find((i) => i.id === item.id);
+      addItem: (item) => {
+        set((state) => ({
+          items: [...state.items, item],
+        }));
+      },
 
-      if (existingItem) {
-        return {
-          items: state.items.map((i) =>
-            i.id === item.id
-              ? { ...i, quantity: i.quantity + item.quantity }
-              : i,
-          ),
-        };
-      }
-
-      return { items: [...state.items, item] };
-    });
-  },
-
-  removeItem: (id) => {
-    set((state) => ({
-      items: state.items.filter((item) => item.id !== id),
-    }));
-  },
-
-  updateQuantity: (id, quantity) => {
-    set((state) => ({
-      items: state.items.map((item) =>
-        item.id === id ? { ...item, quantity } : item,
-      ),
-    }));
-  },
-
-  clearCart: () => set({ items: [] }),
-
-  get totalPrice() {
-    return get().items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
-  },
-}));
+      removeItem: (id) => {
+        set((state) => ({
+          items: state.items.filter((item) => item.id !== id),
+        }));
+      },
+    }),
+    {
+      name: "cart-storage",
+    },
+  ),
+);
