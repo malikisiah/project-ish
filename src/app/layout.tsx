@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 import { JetBrains_Mono } from "next/font/google";
 
 import { type Metadata } from "next";
-
+import { Toaster } from "sonner";
 import { TRPCReactProvider } from "~/trpc/react";
 import NavBar from "~/components/ui/NavBar";
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const font = JetBrains_Mono();
+const font = JetBrains_Mono({ subsets: ["cyrillic"] });
 
 export default function RootLayout({
   children,
@@ -25,6 +25,7 @@ export default function RootLayout({
     >
       <body>
         <TRPCReactProvider>
+          <Toaster />
           <NavBar />
           {children}
         </TRPCReactProvider>

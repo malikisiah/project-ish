@@ -4,6 +4,7 @@ import type { Product } from "@prisma/client";
 import { ArrowDownOnSquareIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { useCartStore } from "~/store/cartStore";
+import { toast } from "sonner";
 
 export default function ProductOverview({ product }: { product: Product }) {
   const addToCart = useCartStore((state) => state.addItem);
@@ -49,12 +50,13 @@ export default function ProductOverview({ product }: { product: Product }) {
           />
         </div>
 
-        {/* Product form */}
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-          {" "}
           <div className="mt-10">
             <button
-              onClick={() => addToCart(product)}
+              onClick={() => {
+                addToCart(product);
+                toast("Added to Bag");
+              }}
               className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary-content focus:ring-offset-2 focus:ring-offset-gray-50"
             >
               Add to bag
