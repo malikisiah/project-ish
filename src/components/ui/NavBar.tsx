@@ -10,6 +10,7 @@ export default function NavBar() {
     <>
       <div className="navbar bg-accent text-accent-content">
         <div className="navbar-start">
+          {/* Mobile */}
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -29,16 +30,16 @@ export default function NavBar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+              className="menu dropdown-content menu-sm z-50 mt-3 w-52 gap-2 rounded-box bg-base-100 p-2 text-black shadow"
             >
               <li>
                 <Link href={"/music"}>Music</Link>
               </li>
               <li>
-                <Link href={"/music"}>Media</Link>
+                <Link href={"/media"}>Media</Link>
               </li>
               <li>
-                <Link href={"/music"}>Merch</Link>
+                <Link href={"/merch"}>Merch</Link>
               </li>
             </ul>
           </div>
