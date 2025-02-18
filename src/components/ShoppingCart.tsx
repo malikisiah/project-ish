@@ -5,6 +5,7 @@ import { useState } from "react";
 import EmbeddedCheckoutModal from "./ui/EmbeddedCheckoutModal";
 import { useCartStore } from "~/store/cartStore";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false);
@@ -101,7 +102,13 @@ export default function ShoppingCart() {
 
               <div className="mt-10">
                 <button
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    if (items.length === 0) {
+                      toast.error("No items in bag!");
+                    } else {
+                      setOpen(true);
+                    }
+                  }}
                   className="focus:ring-primary-500 w-full rounded-md border border-transparent bg-primary px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Checkout

@@ -2,10 +2,16 @@ import { create } from "zustand";
 import type { Product } from "@prisma/client";
 import { persist } from "zustand/middleware";
 
+type CheckoutItem = Product & {
+  quantity: number;
+  size?: "small" | "medium" | "large";
+};
+
 type CartState = {
-  items: Product[];
-  addItem: (item: Product) => void;
+  items: CheckoutItem[];
+  addItem: (item: CheckoutItem) => void;
   removeItem: (id: number) => void;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -23,6 +29,10 @@ export const useCartStore = create<CartState>()(
         set((state) => ({
           items: state.items.filter((item) => item.id !== id),
         }));
+      },
+
+      clearCart: () => {
+        set(() => ({ items: [] }));
       },
     }),
     {

@@ -2,7 +2,11 @@ import Image from "next/image";
 import { db } from "~/server/db";
 
 export default async function Page() {
-  const products = await db.product.findMany();
+  const products = await db.product.findMany({
+    where: {
+      digital: true,
+    },
+  });
 
   return (
     <>

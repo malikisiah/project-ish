@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCartStore } from "~/store/cartStore";
+import Image from "next/image";
 
 export default function NavBar() {
   const items = useCartStore((state) => state.items);
@@ -43,24 +44,34 @@ export default function NavBar() {
               </li>
             </ul>
           </div>
-          {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
+
+          <Link href={"/"} className="ml-10 size-10">
+            {" "}
+            <Image alt="" src={"/logo.svg"} width={500} height={500} />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal gap-8 px-1 text-2xl">
             <li>
-              <Link href={"/music"}>Music</Link>
+              <Link href={"/music"} className="focus:text-white">
+                Music{" "}
+              </Link>
             </li>
             <li>
-              <Link href={"/media"}>Media</Link>
+              <Link href={"/media"} className="focus:text-white">
+                Media
+              </Link>
             </li>
             <li>
-              <Link href={"/merch"}>Merch</Link>
+              <Link href={"/merch"} className="focus:text-white">
+                Merch
+              </Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
           {/* Shopping Cart */}
-          <Link href={"/checkout"} className="btn btn-circle btn-ghost mr-5">
+          <Link href={"/checkout"} className="btn btn-circle btn-ghost mr-10">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

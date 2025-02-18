@@ -7,7 +7,7 @@ import { useCartStore } from "~/store/cartStore";
 import { toast } from "sonner";
 
 export default function ProductOverview({ product }: { product: Product }) {
-  const addToCart = useCartStore((state) => state.addItem);
+  const { items, addItem } = useCartStore();
   return (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -54,8 +54,16 @@ export default function ProductOverview({ product }: { product: Product }) {
           <div className="mt-10">
             <button
               onClick={() => {
-                addToCart(product);
-                toast("Added to Bag");
+                const exists = items.find((item) => product.id === item.id);
+                if (!exists) {
+                  const checkoutItem = { ...product, quantity: 1 };
+                  addItem(checkoutItem);
+                  toast("Added to Bag");
+                } else {
+                  if (product.digital) {
+                    toast.error("Item already in bag");
+                  }
+                }
               }}
               className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary-content focus:ring-offset-2 focus:ring-offset-gray-50"
             >
