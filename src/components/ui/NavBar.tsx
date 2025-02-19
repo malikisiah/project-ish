@@ -45,13 +45,14 @@ export default function NavBar() {
             </ul>
           </div>
 
-          <Link href={"/"} className="ml-10 size-10">
-            {" "}
+          <Link href={"/"} className="ml-20 size-10">
             <Image alt="" src={"/logo.svg"} width={500} height={500} />
           </Link>
         </div>
+
+        {/* Desktop */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-8 px-1 text-2xl">
+          <ul className="menu menu-horizontal gap-10 px-1 text-2xl">
             <li>
               <Link href={"/music"} className="focus:text-white">
                 Music{" "}
@@ -71,11 +72,11 @@ export default function NavBar() {
         </div>
         <div className="navbar-end">
           {/* Shopping Cart */}
-          <Link href={"/checkout"} className="btn btn-circle btn-ghost mr-10">
+          <Link href={"/checkout"} className="btn btn-circle btn-ghost mr-20">
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

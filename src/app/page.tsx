@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -27,15 +28,26 @@ export default function Page() {
                   occaecat fugiat aliqua.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <a
-                    href="#"
+                  <Link
+                    href="/music"
                     className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
-                    Get started
-                  </a>
-                  <a href="#" className="text-sm/6 font-semibold text-gray-900">
-                    Learn more <span aria-hidden="true">→</span>
-                  </a>
+                    Marketing Templates
+                  </Link>
+                  <Link
+                    href="/merch"
+                    className="rounded-md bg-primary-content px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-secondary-content focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    Shop Merch
+                  </Link>
+                </div>
+                <div className="mt-10 flex gap-x-6">
+                  <Link
+                    href="/media"
+                    className="text-sm/6 font-semibold text-gray-900"
+                  >
+                    Media Group Inquires <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
               </div>
             </div>
