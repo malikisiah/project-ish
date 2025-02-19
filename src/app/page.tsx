@@ -19,7 +19,7 @@ export default function Page() {
               <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
                 <div className="hidden sm:mb-10 sm:flex"></div>
                 <h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
-                  CONSULT ISH
+                  SELF-LESS MEDIA GROUP
                 </h1>
                 <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure

@@ -9,7 +9,8 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import { env } from "~/env";
-import type { Product } from "@prisma/client";
+
+import type { CheckoutItem } from "~/store/cartStore";
 
 type StripeResponse = {
   id: string;
@@ -21,11 +22,11 @@ const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_KEY);
 export default function EmbeddedCheckoutModal({
   open,
   setOpen,
-  products,
+  checkoutItems,
 }: {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  products: Product[];
+  checkoutItems: CheckoutItem[];
 }) {
   const fetchClientSecret = useCallback(async () => {
     const response = await fetch("/api/stripe/embedded-checkout", {
@@ -33,7 +34,9 @@ export default function EmbeddedCheckoutModal({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ price_ids: products.map((item) => item.priceId) }),
+      body: JSON.stringify({
+        price_ids: checkoutItems.map((item) => item.priceId),
+      }),
     });
 
     if (!response.ok) {
@@ -43,7 +46,7 @@ export default function EmbeddedCheckoutModal({
     const data = (await response.json()) as StripeResponse;
 
     return data.clientSecret;
-  }, [products]);
+  }, [checkoutItems]);
 
   const options = { fetchClientSecret };
 

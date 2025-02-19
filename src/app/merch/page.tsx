@@ -32,7 +32,11 @@ export default async function Page() {
 
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             {products.map((product) => (
-              <Link key={product.id} href={product.uuid} className="group">
+              <Link
+                key={product.id}
+                href={`merch/${product.uuid}`}
+                className="group"
+              >
                 <Image
                   width={600}
                   height={600}

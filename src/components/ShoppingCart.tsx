@@ -6,14 +6,17 @@ import EmbeddedCheckoutModal from "./ui/EmbeddedCheckoutModal";
 import { useCartStore } from "~/store/cartStore";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Select } from "@headlessui/react";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(false);
-  const { items, removeItem } = useCartStore();
+  const { items, removeItem, updateItemQuantity } = useCartStore();
+
   const router = useRouter();
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <main>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-0">
           <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -26,8 +29,8 @@ export default function ShoppingCart() {
                 role="list"
                 className="divide-y divide-gray-200 border-b border-t border-gray-200"
               >
-                {items.map((product) => (
-                  <li key={product.id} className="flex py-6">
+                {items.map((product, idx) => (
+                  <li key={idx} className="flex py-6">
                     <div className="shrink-0">
                       <Image
                         width={200}
@@ -50,20 +53,46 @@ export default function ShoppingCart() {
                             {`$${Math.trunc(product.priceInCents / 100).toFixed(2)}`}
                           </p>
                         </div>
+                        <div className="mt-2 flex justify-between">
+                          <p className="mt-1 text-sm text-gray-500">
+                            {product.size
+                              ? product.size?.charAt(0).toUpperCase() +
+                                product.size?.slice(1)
+                              : ""}
+                          </p>
+                          <Select
+                            defaultValue={product.quantity}
+                            className={"bg-transparent"}
+                            disabled={product.type !== "merch"}
+                            onChange={(e) =>
+                              updateItemQuantity(
+                                product,
+                                Number(e.target.value),
+                              )
+                            }
+                          >
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                          </Select>
+                        </div>
                       </div>
-                      <div className="mt-4 flex flex-1">
-                        <p className="text-sm font-medium text-gray-700">
-                          Digital Download
-                        </p>
+
+                      <div className="mt-4 flex flex-1 items-end justify-end">
+                        <div className="ml-4 flex items-center gap-3"></div>
                       </div>
 
                       <div className="mt-4 flex flex-1 items-end justify-end">
                         <div className="ml-4">
                           <button
-                            onClick={() => removeItem(product.id)}
+                            onClick={() => removeItem(product)}
                             className="text-primary-600 text-sm font-medium hover:text-neutral-500"
                           >
-                            <span>Remove</span>
+                            <span className="flex items-center gap-1">
+                              Remove <TrashIcon className="size-5" />
+                            </span>
                           </button>
                         </div>
                       </div>
@@ -88,7 +117,8 @@ export default function ShoppingCart() {
                     <dd className="ml-4 text-base font-medium text-gray-900">
                       {`$${Math.trunc(
                         items.reduce(
-                          (total, item) => total + item.priceInCents,
+                          (total, item) =>
+                            total + item.priceInCents * item.quantity,
                           0,
                         ) / 100,
                       ).toFixed(2)}`}
@@ -131,7 +161,11 @@ export default function ShoppingCart() {
           </div>
         </div>
       </main>
-      <EmbeddedCheckoutModal products={items} open={open} setOpen={setOpen} />
+      <EmbeddedCheckoutModal
+        checkoutItems={items}
+        open={open}
+        setOpen={setOpen}
+      />
     </div>
   );
 }
