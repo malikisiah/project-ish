@@ -2,13 +2,19 @@ import stripe from "~/utils/stripe";
 import { type NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
-  price_ids: string[];
+  data: {
+    price_id: string;
+    quantity: number;
+  }[];
 }
 
 export async function POST(req: NextRequest) {
-  const { price_ids } = (await req.json()) as RequestBody;
+  const { data } = (await req.json()) as RequestBody;
 
-  const lineItems = price_ids.map((item) => ({ price: item, quantity: 1 }));
+  const lineItems = data.map((item) => ({
+    price: item.price_id,
+    quantity: item.quantity,
+  }));
 
   const session = await stripe.checkout.sessions.create({
     ui_mode: "embedded",

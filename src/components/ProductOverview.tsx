@@ -112,7 +112,7 @@ export default function ProductOverview({ product }: { product: Product }) {
                 const checkoutItem = {
                   ...product,
                   quantity: 1,
-                  size: product.type === "merch" ? size : undefined,
+                  size: product.digital ? undefined : size,
                 };
 
                 const exists = items.find(
@@ -122,7 +122,7 @@ export default function ProductOverview({ product }: { product: Product }) {
                 );
 
                 if (exists) {
-                  if (product.type === "merch") {
+                  if (!product.digital) {
                     updateItemQuantity(exists, exists.quantity + 1);
                     toast("Added to Bag");
                   } else {

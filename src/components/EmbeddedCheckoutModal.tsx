@@ -35,7 +35,10 @@ export default function EmbeddedCheckoutModal({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        price_ids: checkoutItems.map((item) => item.priceId),
+        data: checkoutItems.map((item) => ({
+          price_id: item.priceId,
+          quantity: item.quantity,
+        })),
       }),
     });
 
