@@ -17,6 +17,8 @@ export const env = createEnv({
     DIRECT_URL: z.string(),
     STRIPE_KEY: z.string(),
     STRIPE_SECRET: z.string(),
+    STRIPE_LOCAL: z.string(),
+    RESEND_API_KEY: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -46,6 +48,8 @@ export const env = createEnv({
     STRIPE_KEY: process.env.STRIPE_KEY,
     STRIPE_SECRET: process.env.STRIPE_SECRET,
     NEXT_PUBLIC_STRIPE_KEY: process.env.NEXT_PUBLIC_STRIPE_KEY,
+    STRIPE_LOCAL: process.env.STRIPE_LOCAL,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
