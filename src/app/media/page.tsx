@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
-
+import { useState } from "react";
+import InquiryForm from "~/components/InquiryForm";
 export default function Page() {
+  const [open, setOpen] = useState(false);
   const incentives = [
     {
       name: "Free shipping",
@@ -40,8 +43,16 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Incentive */}
+      <div className="flex justify-center">
+        <button
+          onClick={() => setOpen(true)}
+          className="btn glass rounded-md bg-secondary text-primary-content hover:bg-accent"
+        >
+          Let&apos;s connect
+        </button>
+      </div>
 
+      {/* Incentive */}
       <div className="">
         <div className="mx-auto max-w-7xl py-24 sm:px-2 sm:py-32 lg:px-4">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
@@ -59,6 +70,7 @@ export default function Page() {
                   luctus varius vitae sem ligula.
                 </p>
               </div>
+
               <Image
                 width={800}
                 height={800}
@@ -93,6 +105,7 @@ export default function Page() {
           </div>
         </div>
       </div>
+      <InquiryForm open={open} setOpen={setOpen} />
     </>
   );
 }

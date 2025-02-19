@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import EmbeddedCheckoutModal from "./ui/EmbeddedCheckoutModal";
+import EmbeddedCheckoutModal from "./EmbeddedCheckoutModal";
 import { useCartStore } from "~/store/cartStore";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
