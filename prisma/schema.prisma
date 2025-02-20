@@ -9,20 +9,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum ProductType {
-  music
-  merch
-  media
-}
-
 model Product {
-  id           Int         @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   name         String
   image        String
   priceInCents Int
-  uuid         String      @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  description  String      @default("")
-  priceId      String      @unique
+  uuid         String  @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description  String  @default("")
+  priceId      String  @unique
   digital      Boolean
-  type         ProductType @default(music)
+  fileName     String?
 }

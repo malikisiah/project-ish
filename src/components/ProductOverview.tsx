@@ -35,7 +35,7 @@ export default function ProductOverview({ product }: { product: Product }) {
 
               <div className="ml-4 border-l border-gray-300 pl-4">
                 <p className="ml-1 flex items-center gap-1 align-middle text-sm text-gray-500">
-                  {product.type === "music" || product.type === "media" ? (
+                  {product.digital ? (
                     <span className="flex items-center gap-2">
                       <ArrowDownOnSquareIcon className="size-5" />
                       Digital Download
@@ -69,7 +69,7 @@ export default function ProductOverview({ product }: { product: Product }) {
 
         <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
           {/* Size Picker */}
-          {product.type === "merch" ? (
+          {!product.digital && (
             <div className="mt-8">
               <fieldset aria-label="Choose a size" className="mt-2">
                 <RadioGroup
@@ -104,7 +104,7 @@ export default function ProductOverview({ product }: { product: Product }) {
                 </RadioGroup>
               </fieldset>
             </div>
-          ) : null}
+          )}
 
           <div className="mt-10">
             <button

@@ -39,6 +39,8 @@ export default function EmbeddedCheckoutModal({
           price_id: item.priceId,
           quantity: item.quantity,
         })),
+
+        shipping: checkoutItems.some((item) => !item.digital),
       }),
     });
 

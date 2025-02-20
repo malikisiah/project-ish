@@ -63,7 +63,7 @@ export default function ShoppingCart() {
                           <Select
                             defaultValue={product.quantity}
                             className={"bg-transparent"}
-                            disabled={product.type !== "merch"}
+                            disabled={product.digital}
                             onChange={(e) =>
                               updateItemQuantity(
                                 product,
