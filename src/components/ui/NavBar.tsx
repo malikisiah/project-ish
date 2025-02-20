@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function NavBar() {
   const items = useCartStore((state) => state.items);
-  const itemCount = items.length;
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0);
   return (
     <>
       <div className="navbar bg-accent text-accent-content">
