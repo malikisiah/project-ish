@@ -1,5 +1,14 @@
 import Modal from "./ui/Modal";
 import type { Dispatch, SetStateAction } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+interface Inputs {
+  email: string;
+  about: string;
+  option1: boolean;
+  option2: boolean;
+  option3: boolean;
+}
 
 export default function InquiryForm({
   open,
@@ -8,10 +17,12 @@ export default function InquiryForm({
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { register, handleSubmit } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
     <Modal open={open} setOpen={setOpen}>
-      {" "}
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-12">
           <div className="pb-12">
             <h2 className="text-base/7 font-semibold text-gray-900">Inquiry</h2>
@@ -33,7 +44,7 @@ export default function InquiryForm({
                       workcation.com/
                     </div> */}
                     <input
-                      type="text"
+                      {...register("email")}
                       className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                     />
                   </div>
@@ -49,8 +60,7 @@ export default function InquiryForm({
                 </label>
                 <div className="mt-2">
                   <textarea
-                    id="about"
-                    name="about"
+                    {...register("about")}
                     rows={3}
                     placeholder="Write a few sentences about yourself"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary sm:text-sm/6"
@@ -72,8 +82,7 @@ export default function InquiryForm({
                     <div className="group grid size-4 grid-cols-1">
                       <input
                         defaultChecked
-                        id="comments"
-                        name="comments"
+                        {...register("option1")}
                         type="checkbox"
                         aria-describedby="comments-description"
                         className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
@@ -101,10 +110,7 @@ export default function InquiryForm({
                     </div>
                   </div>
                   <div className="text-sm/6">
-                    <label
-                      htmlFor="comments"
-                      className="font-medium text-gray-900"
-                    >
+                    <label className="font-medium text-gray-900">
                       Option 1
                     </label>
                     <p id="comments-description" className="text-gray-500">
@@ -116,8 +122,7 @@ export default function InquiryForm({
                   <div className="flex h-6 shrink-0 items-center">
                     <div className="group grid size-4 grid-cols-1">
                       <input
-                        id="candidates"
-                        name="candidates"
+                        {...register("option2")}
                         type="checkbox"
                         aria-describedby="candidates-description"
                         className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
@@ -145,10 +150,7 @@ export default function InquiryForm({
                     </div>
                   </div>
                   <div className="text-sm/6">
-                    <label
-                      htmlFor="candidates"
-                      className="font-medium text-gray-900"
-                    >
+                    <label className="font-medium text-gray-900">
                       Option 2
                     </label>
                     <p id="candidates-description" className="text-gray-500">
@@ -160,8 +162,7 @@ export default function InquiryForm({
                   <div className="flex h-6 shrink-0 items-center">
                     <div className="group grid size-4 grid-cols-1">
                       <input
-                        id="offers"
-                        name="offers"
+                        {...register("option3")}
                         type="checkbox"
                         aria-describedby="offers-description"
                         className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-primary checked:bg-primary indeterminate:border-primary indeterminate:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
@@ -189,10 +190,7 @@ export default function InquiryForm({
                     </div>
                   </div>
                   <div className="text-sm/6">
-                    <label
-                      htmlFor="offers"
-                      className="font-medium text-gray-900"
-                    >
+                    <label className="font-medium text-gray-900">
                       Option 3
                     </label>
                     <p id="offers-description" className="text-gray-500">
@@ -207,7 +205,6 @@ export default function InquiryForm({
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
-            onClick={(e) => e.preventDefault()}
             type="submit"
             className="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
