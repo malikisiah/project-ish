@@ -4,6 +4,7 @@ import { useCartStore } from "~/store/cartStore";
 import { useEffect } from "react";
 import type { PurchasedItem } from "~/app/return/page";
 import type Stripe from "stripe";
+import { ArrowDownOnSquareStackIcon } from "@heroicons/react/24/outline";
 
 export default function OrderComplete({
   items,
@@ -78,12 +79,16 @@ export default function OrderComplete({
                   </dl>
                 </div>
                 {item.downloadURL && (
-                  <a
-                    href={item.downloadURL}
-                    className="mt-6 items-center font-medium text-gray-900 hover:text-gray-600"
-                  >
-                    Download Here
-                  </a>
+                  <div className="mt-4">
+                    <a
+                      target="_blank"
+                      href={item.downloadURL}
+                      className="flex items-center gap-1 font-medium text-gray-900 hover:text-gray-600"
+                    >
+                      <ArrowDownOnSquareStackIcon className="size-5" />
+                      Download Here
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
