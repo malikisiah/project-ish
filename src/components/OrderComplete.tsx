@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useCartStore } from "~/store/cartStore";
 import { useEffect } from "react";
-import type { PurchasedItem } from "~/app/return/page";
+import type { CheckoutItem } from "~/store/cartStore";
 import type Stripe from "stripe";
 import { ArrowDownOnSquareStackIcon } from "@heroicons/react/24/outline";
 
@@ -12,7 +12,7 @@ export default function OrderComplete({
   subtotal,
   shippingDetails,
 }: {
-  items: PurchasedItem[];
+  items: CheckoutItem[];
   total: number;
   subtotal: number;
   shippingDetails: Stripe.Checkout.Session.ShippingDetails | null;
