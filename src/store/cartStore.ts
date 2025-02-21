@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 export type CheckoutItem = Product & {
   quantity: number;
   size?: "small" | "medium" | "large";
+  downloadURL?: string | null;
 };
 
 type CartState = {

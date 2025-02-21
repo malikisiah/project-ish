@@ -1,13 +1,40 @@
-import * as React from "react";
+import type { Stripe } from "stripe";
+
+import type { CheckoutItem } from "~/store/cartStore";
 
 interface EmailTemplateProps {
-  firstName: string;
+  customerDetails: Stripe.Checkout.Session.CustomerDetails;
+
+  products: CheckoutItem[];
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  firstName,
+  customerDetails,
+  products,
 }) => (
-  <div>
-    <h1>Welcome, {firstName}!</h1>
-  </div>
+  <>
+    <div> {customerDetails.name} has placed an order!</div>
+
+    <br />
+
+    {products.map((item, idx) => (
+      <div key={idx}>
+        {item.name} <span> x {item.quantity}</span>
+      </div>
+    ))}
+
+    <br />
+    <br />
+
+    {customerDetails.address && (
+      <div>
+        <p>
+          {customerDetails.address.line1}
+          <br />
+          {customerDetails.address.line2}
+        </p>
+        <p>{`${customerDetails.address.city}, ${customerDetails.address.state} ${customerDetails.address.postal_code}`}</p>
+      </div>
+    )}
+  </>
 );

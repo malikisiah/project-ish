@@ -6,10 +6,6 @@ import supabase from "~/utils/supabase";
 
 import type { CheckoutItem } from "~/store/cartStore";
 
-export type PurchasedItem = CheckoutItem & {
-  downloadURL?: string | null;
-};
-
 export default async function Page({
   searchParams,
 }: {
@@ -34,7 +30,7 @@ export default async function Page({
     return redirect("/");
   }
 
-  const items: PurchasedItem[] = [];
+  const items: CheckoutItem[] = [];
   if (status === "complete" && line_items) {
     for (const item of line_items.data) {
       const product = await db.product.findUniqueOrThrow({

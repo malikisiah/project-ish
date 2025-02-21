@@ -1,26 +1,49 @@
-import type { ReactElement } from "react";
+import { NextResponse } from "next/server";
 import { z } from "zod";
-import { EmailTemplate } from "~/components/EmailTemplate";
+import { env } from "~/env";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import resend from "~/utils/resend";
 
 export const myRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
-  sendEmail: publicProcedure
-    .input(z.object({ to: z.string() }))
+  discordEvent: publicProcedure
+    .input(
+      z.object({
+        message: z.string(),
+        channel: z.enum(["orders", "inquiry-forms"]),
+      }),
+    )
     .mutation(async ({ input }) => {
-      await resend.emails.send({
-        from: "Malik <automation@malikisiah.dev",
-        to: [input.to],
-        subject: "Hello World",
-        react: EmailTemplate({ firstName: "Kyle" }) as ReactElement,
-      });
+      const urlMap = {
+        orders: env.DISCORD_ORDERS_URL,
+        "inquiry-forms": env.DISCORD_INQUIRYFORMS_URL,
+      };
+      const webhookUrl = urlMap[input.channel];
+      const payload = { content: input.message };
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+          return NextResponse.json({ message: "Webhook Success" });
+        } else {
+          return NextResponse.json({ message: "Webhook Failed" });
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          return NextResponse.json({
+            message: "Error sending webhook",
+            error: error.message,
+          });
+        } else {
+          return NextResponse.json({
+            message: "An unknown error occurred",
+          });
+        }
+      }
     }),
 });

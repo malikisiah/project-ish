@@ -19,6 +19,8 @@ export const env = createEnv({
     STRIPE_SECRET: z.string(),
     STRIPE_LOCAL: z.string(),
     RESEND_API_KEY: z.string(),
+    DISCORD_ORDERS_URL: z.string(),
+    DISCORD_INQUIRYFORMS_URL: z.string(),
 
     NODE_ENV: z
       .enum(["development", "test", "production"])
@@ -58,6 +60,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_SUPABASE_SERVICE_KEY:
       process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY,
+    DISCORD_ORDERS_URL: process.env.DISCORD_ORDERS_URL,
+    DISCORD_INQUIRYFORMS_URL: process.env.DISCORD_INQUIRYFORMS_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
