@@ -20,3 +20,19 @@ model Product {
   digital      Boolean
   fileName     String?
 }
+
+model Orders {
+  id              Int      @id @default(autoincrement())
+  date            DateTime @default(now()) @db.Date
+  amountInCents   Int
+  quantity        Int
+  shippingDetails Json?
+  productId       String
+  checkoutSession String
+}
+
+model Inquiries {
+  id      Int      @id @default(autoincrement())
+  date    DateTime @default(now()) @db.Date
+  content Json
+}

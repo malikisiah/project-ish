@@ -60,7 +60,13 @@ export const myRouter = createTRPCRouter({
 
   inquiryFormEmail: publicProcedure
     .input(z.object({ data: inputsSchema }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.inquiries.create({
+        data: {
+          content: input.data,
+        },
+      });
+
       const { error } = await resend.emails.send({
         from: "Malik <automation@updates.malikisiah.dev>",
         to: ["malikisiah214@gmail.com"],

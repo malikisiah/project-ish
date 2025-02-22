@@ -95,7 +95,7 @@ export default function OrderComplete({
           ))}
 
           <div className="sm:ml-40 sm:pl-6">
-            {shippingDetails && (
+            {shippingDetails?.address && (
               <dl className="grid grid-cols-2 gap-x-6 py-10 text-sm">
                 <div>
                   <dt className="font-medium text-gray-900">
@@ -103,9 +103,11 @@ export default function OrderComplete({
                   </dt>
                   <dd className="mt-2 text-gray-700">
                     <address className="not-italic">
-                      <span className="block">Kristin Watson</span>
-                      <span className="block">7363 Cynthia Pass</span>
-                      <span className="block">Toronto, ON N3Y 4H8</span>
+                      <span className="block">{shippingDetails.name}</span>
+                      <span className="block">
+                        {`${shippingDetails.address.line1} ${shippingDetails.address.line2 ? shippingDetails.address.line2 : ""}`}
+                      </span>
+                      <span className="block">{`${shippingDetails.address.city}, ${shippingDetails.address.state} ${shippingDetails.address.postal_code}`}</span>
                     </address>
                   </dd>
                 </div>

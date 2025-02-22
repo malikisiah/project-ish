@@ -53,6 +53,22 @@ export async function POST(request: NextRequest) {
           if (!product.digital) {
             products.push({ ...product, quantity: item.quantity! });
           }
+
+          await db.orders.create({
+            data: {
+              productId: product.uuid,
+              amountInCents: item.amount_total,
+              shippingDetails: {
+                line1: customer_details.address?.line1,
+                line2: customer_details.address?.line2,
+                city: customer_details.address?.city,
+                zip: customer_details.address?.postal_code,
+                state: customer_details.address?.state,
+              },
+              checkoutSession: id,
+              quantity: item.quantity!,
+            },
+          });
         }
 
         if (products.length > 0) {
