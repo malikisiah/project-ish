@@ -46,7 +46,7 @@ export default async function Page() {
                 />
                 <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
                 <p className="mt-1 text-lg font-medium text-gray-900">
-                  {`$${Math.trunc(product.priceInCents / 100)}`}
+                  {`$${(product.priceInCents / 100).toFixed(2)}`}
                 </p>
               </a>
             ))}

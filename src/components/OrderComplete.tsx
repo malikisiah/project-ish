@@ -69,7 +69,7 @@ export default function OrderComplete({
                     <div className="flex pr-4 sm:pr-6">
                       <dt className="font-medium text-gray-900">Price</dt>
                       <dd className="ml-2 text-gray-700">
-                        {`$${Math.trunc(item.priceInCents / 100).toFixed(2)}`}
+                        {`$${(item.priceInCents / 100).toFixed(2)}`}
                       </dd>
                     </div>
                     <div className="flex pl-4 sm:pl-6">
@@ -117,15 +117,15 @@ export default function OrderComplete({
             <dl className="space-y-6 border-t border-gray-200 pt-10 text-sm">
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Total</dt>
-                <dd className="text-gray-700">{`$${Math.trunc(total / 100).toFixed(2)}`}</dd>
+                <dd className="text-gray-700">{`$${(total / 100).toFixed(2)}`}</dd>
               </div>
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Tax</dt>
-                <dd className="text-gray-700">{`$${Math.trunc((subtotal - total) / 100).toFixed(2)}`}</dd>
+                <dd className="text-gray-700">{`$${((subtotal - total) / 100).toFixed(2)}`}</dd>
               </div>
               <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Subtotal</dt>
-                <dd className="text-gray-900">{`$${Math.trunc(subtotal / 100).toFixed(2)}`}</dd>
+                <dd className="text-gray-900">{`$${(subtotal / 100).toFixed(2)}`}</dd>
               </div>
             </dl>
           </div>

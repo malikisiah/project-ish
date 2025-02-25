@@ -50,7 +50,7 @@ export default function ShoppingCart() {
                             </div>
                           </h4>
                           <p className="ml-4 text-sm font-medium text-gray-900">
-                            {`$${Math.trunc(product.priceInCents / 100).toFixed(2)}`}
+                            {`$${(product.priceInCents / 100).toFixed(2)}`}
                           </p>
                         </div>
                         <div className="mt-2 flex justify-between">
@@ -115,12 +115,12 @@ export default function ShoppingCart() {
                       Subtotal
                     </dt>
                     <dd className="ml-4 text-base font-medium text-gray-900">
-                      {`$${Math.trunc(
+                      {`$${(
                         items.reduce(
                           (total, item) =>
                             total + item.priceInCents * item.quantity,
                           0,
-                        ) / 100,
+                        ) / 100
                       ).toFixed(2)}`}
                     </dd>
                   </div>

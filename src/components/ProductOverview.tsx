@@ -30,7 +30,7 @@ export default function ProductOverview({ product }: { product: Product }) {
           <section aria-labelledby="information-heading" className="mt-4">
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                {`$${Math.trunc(product.priceInCents / 100)}`}
+                {`$${product.priceInCents / 100}`}
               </p>
 
               <div className="ml-4 border-l border-gray-300 pl-4">
