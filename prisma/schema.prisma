@@ -26,6 +26,7 @@ model Orders {
   date            DateTime @default(now()) @db.Date
   amountInCents   Int
   quantity        Int
+  size            String?
   shippingDetails Json?
   productId       String
   checkoutSession String

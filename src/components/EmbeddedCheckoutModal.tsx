@@ -38,6 +38,7 @@ export default function EmbeddedCheckoutModal({
         data: checkoutItems.map((item) => ({
           price_id: item.priceId,
           quantity: item.quantity,
+          size: item.size,
         })),
 
         shipping: checkoutItems.some((item) => !item.digital),

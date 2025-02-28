@@ -1,5 +1,4 @@
 import type { Stripe } from "stripe";
-
 import type { CheckoutItem } from "~/store/cartStore";
 
 interface EmailTemplateProps {
@@ -19,7 +18,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 
     {products.map((item, idx) => (
       <div key={idx}>
-        {item.name} <span> x {item.quantity}</span>
+        {item.name} - {item.size} <span> x {item.quantity}</span>
       </div>
     ))}
 

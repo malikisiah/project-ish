@@ -5,6 +5,7 @@ interface RequestBody {
   data: {
     price_id: string;
     quantity: number;
+    size?: string;
   }[];
 
   shipping: boolean;
@@ -26,6 +27,14 @@ export async function POST(req: NextRequest) {
           allowed_countries: ["US"],
         }
       : undefined,
+    metadata: {
+      items: JSON.stringify(
+        data.map((item) => ({
+          price_id: item.price_id,
+          size: item.size,
+        })),
+      ),
+    },
     mode: "payment",
     return_url: `${req.headers.get("origin")}/return?session_id={CHECKOUT_SESSION_ID}`,
   });

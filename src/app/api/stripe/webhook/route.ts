@@ -11,6 +11,11 @@ import { db } from "~/server/db";
 
 import type { CheckoutItem } from "~/store/cartStore";
 
+interface ItemMetadata {
+  price_id: string;
+  size: "small" | "medium" | "large";
+}
+
 export async function POST(request: NextRequest) {
   const headersList = await headers();
   const body = await request.text();
@@ -40,22 +45,35 @@ export async function POST(request: NextRequest) {
 
   switch (event.type) {
     case "checkout.session.completed": {
-      const { customer_details, line_items } =
+      const { customer_details, line_items, metadata } =
         await stripe.checkout.sessions.retrieve(id, {
           expand: ["line_items", "payment_intent"],
         });
 
-      if (customer_details && line_items) {
+      if (customer_details && line_items && metadata) {
         const products: CheckoutItem[] = [];
-        console.log(line_items);
+
+        const itemMetadata: ItemMetadata[] = metadata.items
+          ? (JSON.parse(metadata.items) as ItemMetadata[])
+          : [];
+
         for (const item of line_items.data) {
-          console.log(item.price?.metadata);
           const product = await db.product.findUniqueOrThrow({
             where: { priceId: item.price!.id },
           });
 
+          const itemMeta = itemMetadata.find(
+            (meta) => meta.price_id === item.price!.id,
+          );
+
+          const size = itemMeta ? itemMeta.size : null;
+
           if (!product.digital) {
-            products.push({ ...product, quantity: item.quantity! });
+            products.push({
+              ...product,
+              quantity: item.quantity!,
+              size: size ?? undefined,
+            });
           }
 
           await db.orders.create({
@@ -70,6 +88,7 @@ export async function POST(request: NextRequest) {
                 state: customer_details.address?.state,
               },
               checkoutSession: id,
+              size: size,
               quantity: item.quantity!,
             },
           });
@@ -91,7 +110,7 @@ export async function POST(request: NextRequest) {
           }
 
           await trpc.api.discordEvent({
-            message: `**${customer_details.name}** has placed an order!\n\n${products.map((item) => `(${item.name}) x ${item.quantity}`).join("\n")}\n\n${customer_details.address?.line1}${customer_details.address?.line2 ? "\n" + customer_details.address.line2 : "\n"}\n${customer_details.address?.city}, ${customer_details.address?.state} ${customer_details.address?.postal_code}`,
+            message: `**${customer_details.name}** has placed an order!\n\n${products.map((item) => `(${item.name} - ${item.size}) x ${item.quantity}`).join("\n")}\n\n${customer_details.address?.line1}${customer_details.address?.line2 ? "\n" + customer_details.address.line2 : "\n"}\n${customer_details.address?.city}, ${customer_details.address?.state} ${customer_details.address?.postal_code}`,
             channel: "orders",
           });
         }
